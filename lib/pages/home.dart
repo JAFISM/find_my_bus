@@ -1,7 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../color_palette.dart';
+import '../Global_values/color_palette.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,29 +15,41 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              Container(
+                height: 310,
+                decoration: BoxDecoration(
+                  //color: c1,
                   image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/bus.jpg"),
-              )),
-            ),
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/bus.jpg"),
+                  ),
+                ),
+              ),
+              Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 280,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                        ),
+                        color: Colors.white),
+                    child: _mainwidgets(context),
+                  ))
+            ],
           ),
-          Expanded(
-              flex: 2,
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: c3,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50))),
-                  child: _mainwidgets(context))),
-        ],
+        ),
       ),
     );
   }
@@ -56,19 +68,15 @@ class HomePage extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Icon(Icons.location_on_outlined),
                 ),
-                //labelStyle: TextStyle(color: Colors.black),
-                labelStyle: TextStyle(fontSize: 15),
+                // prefixIconConstraints: BoxConstraints(maxHeight: 20,maxWidth: 30),
                 labelText: "From",
+                labelStyle: TextStyle(fontSize: 15),
                 hintText: 'Search Kochi..',
                 hintStyle:
                     const TextStyle(color: Color(0xffDDDADA), fontSize: 14),
-                // suffixIcon: Padding(
-                //   padding: const EdgeInsets.all(15.0),
-                //   child: Icon(Icons.location_on_outlined),
-                // ),
                 contentPadding: const EdgeInsets.all(15),
                 filled: true,
                 fillColor: Colors.white,
@@ -76,6 +84,25 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none)),
           ),
+          // TextField(
+          //   decoration: InputDecoration(
+          //       prefixIcon: Padding(
+          //         padding: const EdgeInsets.all(12.0),
+          //         child: Icon(Icons.location_on_outlined),
+          //       ),
+          //       //labelStyle: TextStyle(color: Colors.black),
+          //       labelStyle: TextStyle(fontSize: 15),
+          //       labelText: "From",
+          //       hintText: 'Search Kochi..',
+          //       hintStyle:
+          //           const TextStyle(color: Color(0xffDDDADA), fontSize: 14),
+          //       contentPadding: const EdgeInsets.all(15),
+          //       filled: true,
+          //       fillColor: Colors.white,
+          //       border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(15),
+          //           borderSide: BorderSide.none)),
+          // ),
         ),
         Container(
           margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
@@ -88,9 +115,10 @@ class HomePage extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Icon(Icons.send),
                 ),
+                // prefixIconConstraints: BoxConstraints(maxHeight: 20,maxWidth: 30),
                 labelText: "To",
                 labelStyle: TextStyle(fontSize: 15),
                 hintText: 'Search Kakkanad..',
@@ -134,45 +162,12 @@ class HomePage extends StatelessWidget {
             onSaved: (val) => print(val),
           ),
         ),
-        // Container(
-        //   margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
-        //   decoration: BoxDecoration(boxShadow: [
-        //     BoxShadow(
-        //         color: const Color(0xff1D1617).withOpacity(0.11),
-        //         blurRadius: 40,
-        //         spreadRadius: 0.0)
-        //   ]),
-        //   child: TextField(
-        //     decoration: InputDecoration(
-        //         prefixIcon: Padding(
-        //           padding: const EdgeInsets.all(12.0),
-        //           child: Icon(Icons.calendar_month_outlined),
-        //         ),
-        //         labelText: "Date & Time",
-        //         labelStyle: TextStyle(fontSize: 15),
-        //         //hintText: 'Search Kochi..',
-        //         hintStyle:
-        //             const TextStyle(color: Color(0xffDDDADA), fontSize: 14),
-        //         // suffixIcon: Padding(
-        //         //   padding: const EdgeInsets.all(15.0),
-        //         //   child: Icon(Icons.location_on_outlined),
-        //         // ),
-        //         contentPadding: const EdgeInsets.all(15),
-        //         filled: true,
-        //         fillColor: Colors.white,
-        //         border: OutlineInputBorder(
-        //             borderRadius: BorderRadius.circular(15),
-        //             borderSide: BorderSide.none)),
-        //   ),
-        // ),
-        // // TextField(),
-        // TextField(),
         SizedBox(
           height: 40,
         ),
         SizedBox(
           height: 50,
-          width: MediaQuery.of(context).size.width/1.2,
+          width: MediaQuery.of(context).size.width / 1.2,
           child: ElevatedButton(
             onPressed: () {},
             child: Text("Search bus"),
